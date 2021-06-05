@@ -1,0 +1,16 @@
+.sidebar {
+    position: absolute;
+    left: 0;
+    width: 5%;
+    background-color: var(--sidebar-color);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar .nav-buttons-group {
+    display: flex;
+    flex-direction: column;
+}

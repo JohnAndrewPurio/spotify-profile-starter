@@ -1,0 +1,14 @@
+.artist {
+    display: flex;
+    height: 20%;
+    width: 80%;
+    align-items: center;
+    gap: 1vmin;
+    padding: 1vmin;
+}
+
+.artist img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}

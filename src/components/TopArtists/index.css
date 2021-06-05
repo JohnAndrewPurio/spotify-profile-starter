@@ -1,0 +1,27 @@
+.top-artists {
+    width: 50%;
+    height: 100%;
+}
+
+.top-artists .header {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    padding: 2vmin;
+    justify-content: space-evenly;
+}
+
+.top-artists .artists-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+    padding: 2vmin;
+}
+
+.top-artists .artists-list::-webkit-scrollbar {
+    display: none;
+}

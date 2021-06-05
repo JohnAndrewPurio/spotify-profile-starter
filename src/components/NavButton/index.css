@@ -1,0 +1,28 @@
+.nav-button {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 100%;
+    padding: 2vmin;
+    border-radius: 0;
+    border-left: 1vmin transparent solid;
+    font-size: 0.75rem;
+    user-select: none;
+}
+
+.nav-button p {
+    text-transform: capitalize;
+}
+
+.nav-icons {
+    filter: invert(80%) sepia(7%) saturate(11%) hue-rotate(314deg) brightness(97%) contrast(87%);
+    object-fit: cover;
+    width: 100%;
+}
+
+.selected-nav-button {
+    border-left: 1vmin var(--secondary-color) solid;
+}
