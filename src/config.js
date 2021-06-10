@@ -1,7 +1,8 @@
 const authEndpoint = "https://accounts.spotify.com/authorize";
 export const tokenEndpoint = 'https://accounts.spotify.com/api/token'
 export const dataEndpoint = 'https://api.spotify.com/v1/me'
-export const redirectUri = "http://localhost:3000/home"; //temp redirect
+// export const redirectUri = "http://localhost:3000/home"; //temp redirect
+export const redirectUri = "https://spotify-user-profile.netlify.app/home"
 export const logOutEndpoint = "https://accounts.spotify.com/en/logout"
 const clientId = "2cb94ebe7e5c4f139c02692a872022ff";
 
