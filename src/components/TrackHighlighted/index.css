@@ -1,0 +1,22 @@
+.track-highlighted {
+    display: flex;
+    align-items: center;
+    gap: 1vmin;
+}
+
+.track-highlighted img {
+    object-fit: cover;
+    height: 10vmin;
+    width: 10vmin;
+}
+
+.track-highlighted .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 10vmin);
+}
+
+.track-highlighted .desc {
+    padding: 2vmin;
+}

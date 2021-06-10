@@ -14,6 +14,22 @@
   --sidebar-color: #040205;
 }
 
+a {
+  background-color: var(--secondary-color);
+  padding: 1.5vmin;
+  min-width: 12%;
+  border: 0.75vmin solid var(--secondary-color);
+  text-transform: uppercase;
+  border-radius: 999vmin;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
 .App, a, button {
   font-family: var(--text-font);
   color: var(--text-color);

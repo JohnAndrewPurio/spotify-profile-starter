@@ -1,0 +1,31 @@
+.playlists-page {
+    width: 90%;
+    height: 100%;
+    padding: 5vmin;
+}
+
+.playlists-page p {
+    opacity: 0.7;
+}
+
+.playlists-page h4 {
+    opacity: 0.9;
+}
+
+.playlists-page .playlists-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2vmin;
+    height: 10%;
+    width: 100%;
+}
+
+.playlists-page .playlists-content {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: 90%;
+    width: 100%;
+    padding: 3vmin;
+    gap: 2vmin;
+} 

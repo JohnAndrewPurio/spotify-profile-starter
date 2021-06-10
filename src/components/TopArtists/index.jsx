@@ -1,11 +1,14 @@
 import './index.css'
 import { useSelector } from 'react-redux'
 import Artist from "../Artist"
+import Loading from '../Loading'
 
 export default function TopArtists({name}) {
-    const {items} = useSelector(state => name === 'artists' ? state.topArtists: state.topTracks )
+    const topSelection = useSelector(state => name === 'artists' ? state.topArtists: state.topTracks )
 
-    console.log(name)
+    if(!topSelection) return <Loading />
+
+    const { items } = topSelection
 
     return (
         <div className="top-artists">

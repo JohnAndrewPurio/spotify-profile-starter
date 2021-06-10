@@ -1,0 +1,14 @@
+.playlist-track {
+    width: 30vmin;
+    height: 35vmin;
+    text-align: center;
+}
+
+.playlist-track > * {
+    width: 100%;
+}
+
+.playlist-track img {
+    height: 35vmin;
+    object-fit: contain;
+}

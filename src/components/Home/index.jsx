@@ -1,9 +1,17 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { authenticateUser, requestData, requestPlaylistData, requestToken, requestTopArtistsData } from '../../redux/actions'
+import { 
+    authenticateUser, requestData, requestNumberOfFollowedArtists, requestPlaylistData, requestRecentlyPlayed, requestRefreshToken, requestToken, requestTopArtistsData, storeToken 
+} from '../../redux/actions'
 import Profile from '../Profile'
 import Sidebar from '../Sidebar'
+import TopArtistsPage from '../TopArtistsPage'
+import Loading from '../Loading'
 import './index.css'
+import TopTracksPage from '../TopTracksPage'
+import Playlists from '../Playlists'
+
+let refreshTimer
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -11,31 +19,63 @@ export default function Home() {
     const userToken = useSelector(state => state.userToken)
     const userData = useSelector(state => state.userData)
     const playlist = useSelector(state => state.playlist)
+    const currentPage = useSelector(state => state.currentPage)
 
     useEffect(() => {
-        dispatch( authenticateUser(window.location.search.split('=')[1]) )
+        const currentAuthCode = window.location.search.split('=')[1]
 
+        if(!authCode) {
+            dispatch( authenticateUser(currentAuthCode) )
+        }
+
+        return () => {
+            clearInterval(refreshTimer)
+        }
         // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
-        if(authCode) dispatch( requestToken(authCode) )
+        if(authCode && !userToken) {
+            const authToken = JSON.parse( localStorage.getItem('authToken') )
+
+            if( !authToken || authToken !== authCode ) {
+                dispatch( requestToken(authCode) )
+            }
+            
+            if(authToken === authCode && !userToken) {
+                const formerToken = JSON.parse( localStorage.getItem('userToken') )
+
+                dispatch( storeToken(formerToken) )
+            }       
+
+            localStorage.setItem('authToken', JSON.stringify(authCode) )
+        }
 
         // eslint-disable-next-line
     }, [authCode])
 
     useEffect(() => {
         if(userToken) {
-            dispatch( requestData(userToken) )
-            dispatch( requestTopArtistsData('artists') )
-            dispatch( requestTopArtistsData('tracks') )
-        }
+            localStorage.setItem('userToken', JSON.stringify(userToken))
 
+            if(!refreshTimer) {
+                refreshTimer = setInterval( 
+                    dispatch( requestRefreshToken(userToken.refresh_token) )
+                , userToken.expires_in * 1000)
+            }
+
+            dispatch( requestData(userToken.access_token) )
+            dispatch( requestTopArtistsData('artists', userToken.access_token) )
+            dispatch( requestTopArtistsData('tracks', userToken.access_token) )
+            dispatch( requestNumberOfFollowedArtists(userToken.access_token) )
+            dispatch( requestRecentlyPlayed(userToken.access_token) )
+        }
+        
         // eslint-disable-next-line
     }, [userToken])
 
     useEffect(() => {
-        if(userData) dispatch( requestPlaylistData(userData) )
+        if(userData) dispatch( requestPlaylistData(userData, userToken.access_token) )
 
         // eslint-disable-next-line
     }, [userData])
@@ -44,7 +84,13 @@ export default function Home() {
         <div className="home">
             <Sidebar />
             {
-                userData && playlist ? <Profile />: <h2>Loading...</h2>
+                userData && playlist ? 
+                    currentPage === 'profile' ? <Profile />
+                        : currentPage === 'topArtists' ? <TopArtistsPage />
+                        : currentPage === 'topTracks' ? <TopTracksPage name={currentPage} />
+                        : currentPage === 'recent' ? <TopTracksPage name={currentPage} />
+                        : <Playlists />
+                : <Loading />
             }
         </div>
     )

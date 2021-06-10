@@ -2,15 +2,18 @@ import './index.css'
 import { useSelector } from "react-redux"
 import Stats from '../Stats'
 import TopArtists from '../TopArtists'
+import { logOutEndpoint } from '../../config'
 
 const tops = ['artists','tracks']
 
 export default function Profile() {
     const userData = useSelector( state => state.userData )
     const playlist = useSelector( state => state.playlist )
+    const followedArtists = useSelector( state => state.followedArtists ) 
     const { images, followers, display_name } = userData
+    const { artists } = followedArtists
     const titles = ['Followers', 'Following', 'Playlists']
-    const numbers = [followers.total, 0, playlist.items.length]
+    const numbers = [followers.total, artists.total, playlist.items.length]
 
     return(
         <div className="profile">
@@ -22,6 +25,8 @@ export default function Profile() {
                         titles.map( (title, index) => <Stats key={title} number={numbers[index]} title={title} /> )
                     }
                 </div>
+
+                <a href={logOutEndpoint} id="logout">Log Out</a>
             </div>
             <div className="favorites">
                     {

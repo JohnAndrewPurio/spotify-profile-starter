@@ -1,4 +1,7 @@
-import { AUTH_CODE, STORE_TOKEN, STORE_USER_DATA, STORE_PLAYLIST_DATA, TOGGLE_CURRENT_PAGE, STORE_TOP_ARTISTS_DATA, STORE_TOP_TRACKS_DATA } from "./action_types"
+import { 
+    AUTH_CODE, STORE_TOKEN, STORE_USER_DATA, STORE_PLAYLIST_DATA, TOGGLE_CURRENT_PAGE, STORE_TOP_ARTISTS_DATA, STORE_TOP_TRACKS_DATA, 
+    STORE_FOLLOWED_ARTISTS, REFRESH_USER_TOKEN, STORE_RECENTLY_PLAYED, STORE_ARTISTS_TIME_RANGE, STORE_TRACKS_TIME_RANGE
+} from "./action_types"
 
 const initState = {
     authCode: null,
@@ -7,6 +10,10 @@ const initState = {
     playlist: null,
     topArtists: null,
     topTracks: null,
+    followedArtists: null,
+    recentlyPlayed: null,
+    artistTimeRange: null,
+    tracksTimeRange: null,
     currentPage: 'profile'
 }
 
@@ -15,11 +22,16 @@ export default function spotifyReducer(state = initState, action) {
     const selector = {}
     selector[AUTH_CODE] = authenticateUser
     selector[STORE_TOKEN] = storeToken
+    selector[REFRESH_USER_TOKEN] = storeToken
     selector[STORE_USER_DATA] = storeUserData
     selector[STORE_PLAYLIST_DATA] = storePlaylistData
     selector[TOGGLE_CURRENT_PAGE] = toggleCurrentPage
     selector[STORE_TOP_ARTISTS_DATA] = storeTopArtistsData
     selector[STORE_TOP_TRACKS_DATA] = storeTopTracksData
+    selector[STORE_FOLLOWED_ARTISTS] = storeFollowedArtists
+    selector[STORE_RECENTLY_PLAYED] = storeRecentlyPlayed
+    selector[STORE_ARTISTS_TIME_RANGE] = storeArtistsTimeRange
+    selector[STORE_TRACKS_TIME_RANGE] = storeTracksTimeRange
 
     if(selector[type] === undefined) return {...state}
 
@@ -53,3 +65,20 @@ function storeTopArtistsData(state, payload) {
 function storeTopTracksData(state, payload) {
     return {...state, topTracks: payload}
 }
+
+function storeFollowedArtists(state, payload) {
+    return {...state, followedArtists: payload}
+}
+
+function storeRecentlyPlayed(state, payload) {
+    return {...state, recentlyPlayed: payload}
+}
+
+function storeArtistsTimeRange(state, payload) {
+    return {...state, artistTimeRange: payload}
+}
+
+function storeTracksTimeRange(state, payload) {
+    return {...state, tracksTimeRange: payload}
+}
+

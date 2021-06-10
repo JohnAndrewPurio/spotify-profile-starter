@@ -1,0 +1,31 @@
+.top-tracks-page {
+    width: 90%;
+    height: 100%;
+    padding: 5vmin;
+}
+
+.top-tracks-page p {
+    opacity: 0.7;
+}
+
+.top-tracks-page h4 {
+    opacity: 0.9;
+}
+
+.top-tracks-page .top-tracks-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2vmin;
+    height: 10%;
+    width: 100%;
+}
+
+.top-tracks-page .top-tracks-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 90%;
+    width: 100%;
+    padding: 3vmin;
+    gap: 2vmin;
+} 
